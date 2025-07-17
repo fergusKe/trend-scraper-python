@@ -1,0 +1,79 @@
+[project]
+name = "trend-scraper-python"
+version = "1.0.0"
+description = "🔥 Hot Now 爬蟲專案 - Python 版本"
+authors = [
+    {name = "Gary Lin", email = "garylin0969@gmail.com"},
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8.1"
+keywords = ["scraper", "crawler", "trends", "hot", "python"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "selenium>=4.15.2",
+    "beautifulsoup4>=4.12.2",
+    "requests>=2.31.0",
+    "lxml>=4.9.3",
+    "fake-useragent>=1.4.0",
+    "webdriver-manager>=4.0.1",
+]
+
+[project.urls]
+Homepage = "https://hotnow.garylin.dev"
+Repository = "https://github.com/garylin0969/trend-scraper"
+Documentation = "https://github.com/garylin0969/trend-scraper/blob/main/README.md"
+"Bug Tracker" = "https://github.com/garylin0969/trend-scraper/issues"
+
+[project.scripts]
+trend-scraper = "main:main"
+google-trends = "scripts.google_trends:main"
+ptt-trends = "scripts.ptt_trends:main"
+komica-trends = "scripts.komica_trends:main"
+reddit-trends = "scripts.reddit_trends:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["src"]
+
+[tool.hatch.build.targets.wheel]
+sources = ["src"]
+packages = ["src"]
+
+[tool.uv]
+dev-dependencies = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.5.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

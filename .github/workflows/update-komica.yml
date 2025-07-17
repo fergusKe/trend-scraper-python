@@ -1,0 +1,59 @@
+name: Update Komica Trends (Python)
+
+on:
+  schedule:
+    # 每小時第 18、48 分鐘執行
+    - cron: '18,48 * * * *'
+  workflow_dispatch:
+    # 允許手動觸發
+
+jobs:
+  update-komica-trends:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+        
+    - name: Install dependencies
+      run: |
+        cd trend-scraper-python
+        uv sync
+        
+    - name: Set up Chrome
+      uses: browser-actions/setup-chrome@latest
+      
+    - name: Run Komica Trends scraper
+      run: |
+        cd trend-scraper-python
+        uv run python src/komica_trends.py
+        
+    - name: Check if data changed
+      id: verify-changed-files
+      run: |
+        cd trend-scraper-python
+        if [[ `git status --porcelain` ]]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push if changed
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        cd trend-scraper-python
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/komica-trends.json
+        git commit -m "🎯 Update Komica Trends data - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
+        git push
