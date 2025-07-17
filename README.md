@@ -11,7 +11,8 @@
 Hot Now 是一個整合各大平台熱門內容的資訊聚合網站，此專案為 Python 版本的資料爬蟲，提供與 TypeScript 版本相同的功能。
 
 -   **網站連結**: [https://hotnow.garylin.dev](https://hotnow.garylin.dev)
--   **主專案**: [https://github.com/garylin0969/hot-now](https://github.com/garylin0969/hot-now)
+-   **本專案 GitHub Pages**: [https://ferguske.github.io/trend-scraper-python/](https://ferguske.github.io/trend-scraper-python/)
+-   **原始專案**: [https://github.com/garylin0969/hot-now](https://github.com/garylin0969/hot-now)
 -   **Chrome 擴充功能**: [Hot Now ｜熱門話題一把抓](https://chromewebstore.google.com/detail/hot-now%EF%BD%9C%E7%86%B1%E9%96%80%E8%A9%B1%E9%A1%8C%E4%B8%80%E6%8A%8A%E6%8A%93/pcgkeopgenagbemoagdogljeapjhapch)
 
 ## � 支援平台
@@ -185,6 +186,44 @@ Python 版本採用了以下反偵測技術：
 }
 ```
 
+## 🌐 GitHub Pages API 端點
+
+部署到 GitHub Pages 後，您的資料將可透過以下網址存取：
+
+```
+https://ferguske.github.io/trend-scraper-python/data/[檔案名].json
+```
+
+### 可用的 API 端點
+
+| 平台             | API 端點                                    | 更新頻率    |
+| ---------------- | ------------------------------------------- | ----------- |
+| **PTT**          | `/data/ptt-trends.json`                    | 每 10 分鐘  |
+| **Google**       | `/data/google-trends.json`                 | 每 30 分鐘  |
+| **Komica(K島)**  | `/data/komica-trends.json`                 | 每 30 分鐘  |
+| **Reddit r/all** | `/data/reddit-all-hot.json`               | 每 30 分鐘  |
+| **Reddit Taiwan**| `/data/reddit-taiwanese-hot.json`         | 每 30 分鐘  |
+| **Reddit China** | `/data/reddit-china-irl-hot.json`         | 每 30 分鐘  |
+| **BBC 中文**     | `/data/bbc-trends.json`                    | 每 30 分鐘  |
+
+### 使用範例
+
+```javascript
+// 取得 PTT 熱門文章
+fetch('https://ferguske.github.io/trend-scraper-python/data/ptt-trends.json')
+  .then(response => response.json())
+  .then(data => console.log(data));
+```
+
+```bash
+# 使用 curl 取得資料
+curl https://ferguske.github.io/trend-scraper-python/data/google-trends.json
+```
+
+### CORS 支援
+
+GitHub Pages 預設支援 CORS，您可以在任何網站中直接存取這些資料。
+
 ## 🤖 自動化部署
 
 本專案使用 GitHub Actions 實現自動化爬蟲，每個平台都有獨立的工作流程：
@@ -347,7 +386,9 @@ uv sync
 ## 🔗 相關連結
 
 - **Hot Now 網站**: https://hotnow.garylin.dev
-- **主專案 (TypeScript)**: https://github.com/garylin0969/trend-scraper
+- **本專案 GitHub Pages**: https://ferguske.github.io/trend-scraper-python/
+- **本專案原始碼**: https://github.com/fergusKe/trend-scraper-python
+- **原始專案 (TypeScript)**: https://github.com/garylin0969/trend-scraper
 - **Chrome 擴充功能**: [Hot Now ｜熱門話題一把抓](https://chromewebstore.google.com/detail/hot-now%EF%BD%9C%E7%86%B1%E9%96%80%E8%A9%B1%E9%A1%8C%E4%B8%80%E6%8A%8A%E6%8A%93/pcgkeopgenagbemoagdogljeapjhapch)
 - **uv 文件**: https://docs.astral.sh/uv/
 
