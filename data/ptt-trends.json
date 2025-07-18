@@ -1,8 +1,18 @@
 {
-  "updated": "2025-07-18T11:16:39.456633Z",
+  "updated": "2025-07-18T11:27:55.127965Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
+    {
+      "recommendScore": "751",
+      "recommendCount": "751",
+      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
+    },
     {
       "recommendScore": "618",
       "recommendCount": "618",
@@ -10,18 +20,7 @@
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752808448.A.15C",
       "author": "",
       "board": "Gossiping",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
-    },
-    {
-      "recommendScore": "721",
-      "recommendCount": "721",
-      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？",
-      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
-      "author": "",
-      "board": "Gossiping",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
+      "publishTime": ""
     },
     {
       "recommendScore": "327",
@@ -42,8 +41,8 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "439",
-      "recommendCount": "439",
+      "recommendScore": "440",
+      "recommendCount": "440",
       "title": "[新聞] 有片／出事了！新北4歲童誤轉消防栓　馬路「全是泡沫」大淹水",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752824291.A.C0B",
       "author": "",
