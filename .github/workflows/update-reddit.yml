@@ -27,7 +27,6 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd trend-scraper-python
         uv sync
         
     - name: Set up Chrome
@@ -35,13 +34,11 @@ jobs:
       
     - name: Run Reddit Trends scraper
       run: |
-        cd trend-scraper-python
         uv run python src/reddit_trends.py
         
     - name: Check if data changed
       id: verify-changed-files
       run: |
-        cd trend-scraper-python
         if [[ `git status --porcelain` ]]; then
           echo "changed=true" >> $GITHUB_OUTPUT
         else

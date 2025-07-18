@@ -27,7 +27,6 @@ jobs:
         
     - name: Install dependencies
       run: |
-        cd trend-scraper-python
         uv sync
         
     - name: Set up Chrome
@@ -35,13 +34,11 @@ jobs:
       
     - name: Run Google Trends scraper
       run: |
-        cd trend-scraper-python
         uv run python src/google_trends.py
         
     - name: Check if data changed
       id: verify-changed-files
       run: |
-        cd trend-scraper-python
         if [[ `git status --porcelain` ]]; then
           echo "changed=true" >> $GITHUB_OUTPUT
         else
@@ -51,7 +48,6 @@ jobs:
     - name: Commit and push if changed
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        cd trend-scraper-python
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add data/google-trends.json
