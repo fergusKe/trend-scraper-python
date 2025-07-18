@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
     # 允許手動觸發
 
+# 設定必要的權限
+permissions:
+  contents: write
+
 jobs:
   update-ptt-trends:
     runs-on: ubuntu-latest

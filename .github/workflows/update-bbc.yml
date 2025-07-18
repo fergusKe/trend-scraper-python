@@ -1,9 +1,15 @@
 name: Update BBC Trends (Python)
 
 on:
-    schedule:
-        - cron: '15,45 * * * *' # 每小時第 15 和 45 分鐘執行
-    workflow_dispatch:
+  schedule:
+    # 每小時第 15、45 分鐘執行
+    - cron: '15,45 * * * *'
+  workflow_dispatch:
+    # 允許手動觸發
+
+# 設定必要的權限
+permissions:
+  contents: write
 
 jobs:
     update:
