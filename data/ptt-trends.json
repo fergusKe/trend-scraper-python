@@ -1,5 +1,5 @@
 {
-  "updated": "2025-07-18T10:17:22.617126Z",
+  "updated": "2025-07-18T10:30:48.225564Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
@@ -8,6 +8,16 @@
       "recommendCount": "616",
       "title": "[爆卦] 兒虐致死加重刑期綠委全反對",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752808448.A.15C",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
+    },
+    {
+      "recommendScore": "604",
+      "recommendCount": "604",
+      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
       "author": "",
       "board": "Gossiping",
       "publishTime": "",
@@ -23,18 +33,8 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "568",
-      "recommendCount": "568",
-      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？",
-      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
-      "author": "",
-      "board": "Gossiping",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
-    },
-    {
-      "recommendScore": "320",
-      "recommendCount": "320",
+      "recommendScore": "321",
+      "recommendCount": "321",
       "title": "[新聞] 立院三讀刑法「剴剴條款」投錯按下同意票　邱議瑩道歉了",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752818184.A.2C7",
       "author": "",
