@@ -1,59 +1,60 @@
 name: Update Reddit Trends (Python)
 
 on:
-  schedule:
-    # 每小時第 28、58 分鐘執行
-    - cron: '28,58 * * * *'
-  workflow_dispatch:
-    # 允許手動觸發
-
-# 設定必要的權限
-permissions:
-  contents: write
+    schedule:
+        - cron: '28,58 * * * *' # 每小時第 28 和 58 分鐘執行
+    workflow_dispatch:
 
 jobs:
-  update-reddit-trends:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        
-    - name: Install uv
-      uses: astral-sh/setup-uv@v3
-      with:
-        version: "latest"
-        
-    - name: Install dependencies
-      run: |
-        uv sync
-        
-    - name: Set up Chrome
-      uses: browser-actions/setup-chrome@latest
-      
-    - name: Run Reddit Trends scraper
-      run: |
-        uv run python src/reddit_trends.py
-        
-    - name: Check if data changed
-      id: verify-changed-files
-      run: |
-        if [[ `git status --porcelain` ]]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Commit and push if changed
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add data/reddit-*-hot.json
-        git commit -m "🔥 Update Reddit Trends data - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
-        git push
+    update:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.11'
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v3
+              with:
+                  version: "latest"
+
+            - name: Install dependencies
+              run: uv sync
+
+            - name: Set up Chrome
+              uses: browser-actions/setup-chrome@latest
+
+            - name: Run Reddit Trends scraper
+              run: uv run python src/reddit_trends.py
+
+            - name: Commit and Push Results
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config --global user.name "GitHub Action"
+                  git config --global user.email "action@github.com"
+
+                  # 先保存爬蟲的新資料
+                  cp data/reddit-all-hot.json /tmp/reddit-all-hot.json
+                  cp data/reddit-taiwanese-hot.json /tmp/reddit-taiwanese-hot.json
+                  cp data/reddit-china-irl-hot.json /tmp/reddit-china-irl-hot.json
+
+                  # 拉取最新的程式碼
+                  git pull origin main
+
+                  # 把新爬到的資料覆蓋回去
+                  cp /tmp/reddit-all-hot.json data/reddit-all-hot.json
+                  cp /tmp/reddit-taiwanese-hot.json data/reddit-taiwanese-hot.json
+                  cp /tmp/reddit-china-irl-hot.json data/reddit-china-irl-hot.json
+
+                  # 提交並推送
+                  git add data/reddit-all-hot.json
+                  git add data/reddit-taiwanese-hot.json
+                  git add data/reddit-china-irl-hot.json
+                  git commit -m "update reddit trends [CI] $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M:%S')" || echo "Nothing to commit"
+                  git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main

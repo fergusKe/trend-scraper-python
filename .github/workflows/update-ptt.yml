@@ -1,59 +1,54 @@
 name: Update PTT Trends (Python)
 
 on:
-  schedule:
-    # 每 10 分鐘執行 (每小時第 1、11、21、31、41、51 分鐘)
-    - cron: '1,11,21,31,41,51 * * * *'
-  workflow_dispatch:
-    # 允許手動觸發
-
-# 設定必要的權限
-permissions:
-  contents: write
+    schedule:
+        - cron: '1,11,21,31,41,51 * * * *' # 每 10 分鐘執行（錯開時間）
+    workflow_dispatch:
 
 jobs:
-  update-ptt-trends:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-        
-    - name: Install uv
-      uses: astral-sh/setup-uv@v3
-      with:
-        version: "latest"
-        
-    - name: Install dependencies
-      run: |
-        uv sync
-        
-    - name: Set up Chrome
-      uses: browser-actions/setup-chrome@latest
-      
-    - name: Run PTT Trends scraper
-      run: |
-        uv run python src/ptt_trends.py
-        
-    - name: Check if data changed
-      id: verify-changed-files
-      run: |
-        if [[ `git status --porcelain` ]]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
-        
-    - name: Commit and push if changed
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add data/ptt-trends.json
-        git commit -m "📰 Update PTT Trends data - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
-        git push
+    update:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.11'
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v3
+              with:
+                  version: "latest"
+
+            - name: Install dependencies
+              run: uv sync
+
+            - name: Set up Chrome
+              uses: browser-actions/setup-chrome@latest
+
+            - name: Run PTT Trends scraper
+              run: uv run python src/ptt_trends.py
+
+            - name: Commit and Push Results
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config --global user.name "GitHub Action"
+                  git config --global user.email "action@github.com"
+
+                  # 先保存爬蟲的新資料
+                  cp data/ptt-trends.json /tmp/ptt-trends.json
+
+                  # 拉取最新的程式碼
+                  git pull origin main
+
+                  # 把新爬到的資料覆蓋回去
+                  cp /tmp/ptt-trends.json data/ptt-trends.json
+
+                  # 提交並推送
+                  git add data/ptt-trends.json
+                  git commit -m "update ptt trends [CI] $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M:%S')" || echo "Nothing to commit"
+                  git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
