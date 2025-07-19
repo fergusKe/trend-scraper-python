@@ -1,5 +1,5 @@
 {
-  "updated": "2025-07-19T08:17:41.206823Z",
+  "updated": "2025-07-19T08:31:40.501701Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
@@ -12,16 +12,6 @@
       "board": "Baseball",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
-    },
-    {
-      "recommendScore": "877",
-      "recommendCount": "877",
-      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？\n已刪文",
-      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
-      "author": "",
-      "board": "Gossiping",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
     },
     {
       "recommendScore": "356",
@@ -43,10 +33,19 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "201",
-      "recommendCount": "201",
+      "recommendScore": "202",
+      "recommendCount": "202",
       "title": "[新聞] 台南災區屋頂重建缺工缺料 災民籲市府請台積電協助",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752885106.A.DD0",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "377",
+      "recommendCount": "377",
+      "title": "[新聞] 快訊／熱爆了！高雄鳳山1017戶無預警停電台電搶修中",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752899798.A.372",
       "author": "",
       "board": "Gossiping",
       "publishTime": ""
