@@ -1,11 +1,11 @@
 {
-  "updated": "2025-07-19T00:41:49.142506Z",
-  "total_found": 2,
-  "returned_count": 2,
+  "updated": "2025-07-19T01:17:15.278030Z",
+  "total_found": 5,
+  "returned_count": 5,
   "articles": [
     {
-      "recommendScore": "877",
-      "recommendCount": "877",
+      "recommendScore": "878",
+      "recommendCount": "878",
       "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
       "author": "",
@@ -14,10 +14,37 @@
       "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
     },
     {
-      "recommendScore": "609",
-      "recommendCount": "609",
+      "recommendScore": "607",
+      "recommendCount": "607",
       "title": "[爆卦] 兒虐致死加重刑期綠委全反對",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752808448.A.15C",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "345",
+      "recommendCount": "345",
+      "title": "[新聞] 立院三讀刑法「剴剴條款」投錯按下同意票　邱議瑩道歉了",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752818184.A.2C7",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "523",
+      "recommendCount": "523",
+      "title": "[新聞] 有片／出事了！新北4歲童誤轉消防栓　馬路「全是泡沫」大淹水",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752824291.A.C0B",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "378",
+      "recommendCount": "378",
+      "title": "[新聞] 大開眼界!「剴剴條款」45綠委二讀反對",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826567.A.1DC",
       "author": "",
       "board": "Gossiping",
       "publishTime": ""
