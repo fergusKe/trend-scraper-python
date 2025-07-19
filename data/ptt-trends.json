@@ -1,8 +1,18 @@
 {
-  "updated": "2025-07-19T05:46:06.623883Z",
+  "updated": "2025-07-19T05:53:31.749938Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
+    {
+      "recommendScore": "1117",
+      "recommendCount": "1117",
+      "title": "[情報] 魔鷹退出明星賽",
+      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752901421.A.E32",
+      "author": "",
+      "board": "Baseball",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
+    },
     {
       "recommendScore": "877",
       "recommendCount": "877",
@@ -12,16 +22,6 @@
       "board": "Gossiping",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
-    },
-    {
-      "recommendScore": "1034",
-      "recommendCount": "1034",
-      "title": "[情報] 魔鷹退出明星賽",
-      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752901421.A.E32",
-      "author": "",
-      "board": "Baseball",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
     },
     {
       "recommendScore": "343",
