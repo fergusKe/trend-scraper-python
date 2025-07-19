@@ -1,7 +1,7 @@
 {
-  "updated": "2025-07-19T12:18:12.615304Z",
-  "total_found": 1,
-  "returned_count": 1,
+  "updated": "2025-07-19T12:34:22.108023Z",
+  "total_found": 5,
+  "returned_count": 5,
   "articles": [
     {
       "recommendScore": "1302",
@@ -12,6 +12,44 @@
       "board": "Baseball",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
+    },
+    {
+      "recommendScore": "938",
+      "recommendCount": "938",
+      "title": "[分享] 魔鷹IG更新",
+      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752921041.A.D43",
+      "author": "",
+      "board": "Baseball",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/hf6jVDJ/s/6a901f7def77dd41c511cc74d903bf92"
+    },
+    {
+      "recommendScore": "355",
+      "recommendCount": "355",
+      "title": "[問卦] 八又翻！大罷免今晚現場圖！ 人山人海",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752845887.A.763",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
+    },
+    {
+      "recommendScore": "366",
+      "recommendCount": "366",
+      "title": "[新聞] 北市公車撞死「部桃外科主任」 喪命前小跑步過馬路畫面曝",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752897513.A.049",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "411",
+      "recommendCount": "411",
+      "title": "[新聞] 快訊／熱爆了！高雄鳳山1017戶無預警停電台電搶修中",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752899798.A.372",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
     }
   ]
 }
