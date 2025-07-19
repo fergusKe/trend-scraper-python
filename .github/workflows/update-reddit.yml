@@ -39,18 +39,30 @@ jobs:
                   git config --global user.name "GitHub Action"
                   git config --global user.email "action@github.com"
 
-                  # 先保存爬蟲的新資料
-                  cp data/reddit-all-hot.json /tmp/reddit-all-hot.json
-                  cp data/reddit-taiwanese-hot.json /tmp/reddit-taiwanese-hot.json
-                  cp data/reddit-china-irl-hot.json /tmp/reddit-china-irl-hot.json
+                  # 檢查檔案是否存在，如果存在則保存
+                  if [ -f "data/reddit-all-hot.json" ]; then
+                      cp data/reddit-all-hot.json /tmp/reddit-all-hot.json
+                  fi
+                  if [ -f "data/reddit-taiwanese-hot.json" ]; then
+                      cp data/reddit-taiwanese-hot.json /tmp/reddit-taiwanese-hot.json
+                  fi
+                  if [ -f "data/reddit-china-irl-hot.json" ]; then
+                      cp data/reddit-china-irl-hot.json /tmp/reddit-china-irl-hot.json
+                  fi
 
                   # 拉取最新的程式碼
                   git pull origin main
 
-                  # 把新爬到的資料覆蓋回去
-                  cp /tmp/reddit-all-hot.json data/reddit-all-hot.json
-                  cp /tmp/reddit-taiwanese-hot.json data/reddit-taiwanese-hot.json
-                  cp /tmp/reddit-china-irl-hot.json data/reddit-china-irl-hot.json
+                  # 如果有保存的資料，則覆蓋回去
+                  if [ -f "/tmp/reddit-all-hot.json" ]; then
+                      cp /tmp/reddit-all-hot.json data/reddit-all-hot.json
+                  fi
+                  if [ -f "/tmp/reddit-taiwanese-hot.json" ]; then
+                      cp /tmp/reddit-taiwanese-hot.json data/reddit-taiwanese-hot.json
+                  fi
+                  if [ -f "/tmp/reddit-china-irl-hot.json" ]; then
+                      cp /tmp/reddit-china-irl-hot.json data/reddit-china-irl-hot.json
+                  fi
 
                   # 提交並推送
                   git add data/reddit-all-hot.json
