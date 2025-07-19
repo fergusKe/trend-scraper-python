@@ -1,7 +1,7 @@
 {
-  "updated": "2025-07-19T08:05:21.787684Z",
-  "total_found": 1,
-  "returned_count": 1,
+  "updated": "2025-07-19T08:17:41.206823Z",
+  "total_found": 5,
+  "returned_count": 5,
   "articles": [
     {
       "recommendScore": "1312",
@@ -12,6 +12,44 @@
       "board": "Baseball",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
+    },
+    {
+      "recommendScore": "877",
+      "recommendCount": "877",
+      "title": "[問卦] 政黑打臉：什麼都改成死刑 你真的ok？\n已刪文",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826951.A.213",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
+    },
+    {
+      "recommendScore": "356",
+      "recommendCount": "356",
+      "title": "[問卦] 八又翻！大罷免今晚現場圖！ 人山人海",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752845887.A.763",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
+    },
+    {
+      "recommendScore": "-329",
+      "recommendCount": "329",
+      "title": "[新聞] 曹興誠「職棒打假球的比其他球員認真」",
+      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752829622.A.937",
+      "author": "",
+      "board": "Baseball",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "201",
+      "recommendCount": "201",
+      "title": "[新聞] 台南災區屋頂重建缺工缺料 災民籲市府請台積電協助",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752885106.A.DD0",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
     }
   ]
 }
