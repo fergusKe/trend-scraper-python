@@ -1,11 +1,11 @@
 {
-  "updated": "2025-07-19T07:27:57.971488Z",
-  "total_found": 2,
-  "returned_count": 2,
+  "updated": "2025-07-19T07:35:53.041033Z",
+  "total_found": 5,
+  "returned_count": 5,
   "articles": [
     {
-      "recommendScore": "1308",
-      "recommendCount": "1308",
+      "recommendScore": "1310",
+      "recommendCount": "1310",
       "title": "[情報] 魔鷹退出明星賽",
       "link": "https://www.pttweb.cc/bbs/Baseball/M.1752901421.A.E32",
       "author": "",
@@ -22,6 +22,34 @@
       "board": "Gossiping",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/D06owTG/s/6cdd4be106f10f9804625a8ac8f027a1"
+    },
+    {
+      "recommendScore": "528",
+      "recommendCount": "528",
+      "title": "[新聞] 有片／出事了！新北4歲童誤轉消防栓　馬路「全是泡沫」大淹水",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752824291.A.C0B",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "382",
+      "recommendCount": "382",
+      "title": "[新聞] 大開眼界!「剴剴條款」45綠委二讀反對",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752826567.A.1DC",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "355",
+      "recommendCount": "355",
+      "title": "[問卦] 八又翻！大罷免今晚現場圖！ 人山人海",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752845887.A.763",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
     }
   ]
 }
