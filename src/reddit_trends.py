@@ -48,6 +48,25 @@ REDDIT_URLS = [
     )
 ]
 
+# RSS 備選方案
+REDDIT_RSS_URLS = [
+    RedditUrl(
+        url='https://www.reddit.com/r/all/hot.rss?limit=50',
+        filename='data/reddit-all-hot.json',
+        description='Reddit r/all 熱門文章 (RSS)'
+    ),
+    RedditUrl(
+        url='https://www.reddit.com/r/Taiwanese/hot.rss?limit=50',
+        filename='data/reddit-taiwanese-hot.json',
+        description='Reddit r/Taiwanese 熱門文章 (RSS)'
+    ),
+    RedditUrl(
+        url='https://www.reddit.com/r/China_irl/hot.rss?limit=50',
+        filename='data/reddit-china-irl-hot.json',
+        description='Reddit r/China_irl 熱門文章 (RSS)'
+    )
+]
+
 def setup_driver():
     """設定 Chrome WebDriver"""
     options = Options()
@@ -58,10 +77,47 @@ def setup_driver():
     options.add_argument('--disable-blink-features=AutomationControlled')
     options.add_argument('--disable-features=VizDisplayCompositor')
     
-    # 設定隨機 User-Agent
-    ua = UserAgent()
-    user_agent = ua.random
+    # 添加更多反偵測選項
+    options.add_argument('--disable-web-security')
+    options.add_argument('--disable-features=VizDisplayCompositor')
+    options.add_argument('--disable-ipc-flooding-protection')
+    options.add_argument('--disable-backgrounding-occluded-windows')
+    options.add_argument('--disable-renderer-backgrounding')
+    options.add_argument('--disable-background-networking')
+    options.add_argument('--disable-background-timer-throttling')
+    options.add_argument('--disable-plugins-discovery')
+    options.add_argument('--disable-extensions-http-throttling')
+    options.add_argument('--no-first-run')
+    options.add_argument('--no-default-browser-check')
+    options.add_argument('--disable-default-apps')
+    options.add_argument('--disable-popup-blocking')
+    options.add_argument('--disable-translate')
+    options.add_argument('--disable-sync')
+    options.add_argument('--disable-prompt-on-repost')
+    options.add_argument('--disable-hang-monitor')
+    options.add_argument('--disable-client-side-phishing-detection')
+    options.add_argument('--disable-component-update')
+    options.add_argument('--disable-domain-reliability')
+    options.add_argument('--disable-features=TranslateUI')
+    
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
+    
+    # 設定更真實的視窗大小和語言
+    options.add_argument('--window-size=1920,1080')
+    options.add_argument('--lang=zh-TW')
+    
+    # 使用固定的 User-Agent（模擬常見瀏覽器）
+    user_agents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    ]
+    user_agent = random.choice(user_agents)
     options.add_argument(f'--user-agent={user_agent}')
+    
+    # 設定代理輪換（雖然這在 GitHub Actions 中可能無效）
+    # 但在本地測試時可能有用
     
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
@@ -69,74 +125,111 @@ def setup_driver():
     # 移除 webdriver 痕跡
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     
+    # 設定額外的瀏覽器屬性
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', {
+        "userAgent": user_agent,
+        "acceptLanguage": "zh-TW,zh;q=0.9,en;q=0.8",
+        "platform": "MacIntel"
+    })
+    
+    # 設定視口大小
+    driver.execute_cdp_cmd('Emulation.setDeviceMetricsOverride', {
+        'width': 1920,
+        'height': 1080,
+        'deviceScaleFactor': 1,
+        'mobile': False
+    })
+    
     return driver
 
 def fetch_reddit_data_with_selenium(url: str) -> Optional[Dict]:
     """使用 Selenium 獲取 Reddit JSON 資料"""
-    driver = setup_driver()
+    max_retries = 3
     
-    try:
-        print(f"🔗 正在存取: {url}")
+    for attempt in range(max_retries):
+        if attempt > 0:
+            delay = random.uniform(10, 20)  # 重試前等待更長時間
+            print(f"⏳ 第 {attempt + 1} 次嘗試，等待 {delay:.2f} 秒...")
+            time.sleep(delay)
         
-        # 隨機延遲避免被偵測
-        delay = random.uniform(2, 5)
-        print(f"⏳ 隨機延遲 {delay:.2f} 秒...")
-        time.sleep(delay)
+        driver = setup_driver()
         
-        # 前往 Reddit JSON API
-        driver.get(url)
-        
-        # 等待頁面載入
         try:
-            WebDriverWait(driver, 15).until(
-                EC.presence_of_element_located((By.TAG_NAME, "body"))
-            )
-        except TimeoutException:
-            print("⚠️ 頁面載入超時")
-            return None
-        
-        # 額外等待確保內容完全載入
-        time.sleep(2)
-        
-        # 獲取頁面內容
-        try:
-            # 先嘗試從 pre 標籤中提取 JSON
+            print(f"🔗 正在存取: {url}")
+            
+            # 隨機延遲避免被偵測
+            delay = random.uniform(5, 10)  # 增加延遲時間
+            print(f"⏳ 隨機延遲 {delay:.2f} 秒...")
+            time.sleep(delay)
+            
+            # 先訪問 Reddit 首頁建立 session
+            print("🏠 先訪問 Reddit 首頁...")
+            driver.get("https://www.reddit.com")
+            time.sleep(random.uniform(3, 5))
+            
+            # 再前往 JSON API
+            print("📡 前往 JSON API...")
+            driver.get(url)
+            
+            # 等待頁面載入
             try:
-                pre_element = driver.find_element(By.TAG_NAME, "pre")
-                json_text = pre_element.text
-                print("✅ 從 pre 標籤中找到內容")
-            except:
-                # 如果沒有 pre 標籤，檢查 body 內容
-                body_element = driver.find_element(By.TAG_NAME, "body")
-                body_text = body_element.text
-                
-                # 檢查 body 內容是否看起來像 JSON
-                if body_text.strip().startswith('{') and body_text.strip().endswith('}'):
-                    json_text = body_text
-                    print("✅ 從 body 標籤中找到 JSON 內容")
-                else:
-                    print("❌ 頁面內容不是 JSON 格式")
-                    print(f"Content-Type: {driver.execute_script('return document.contentType')}")
-                    print(f"頁面標題: {driver.title}")
-                    print(f"回應內容: {body_text[:500]}...")
-                    return None
+                WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located((By.TAG_NAME, "body"))
+                )
+            except TimeoutException:
+                print("⚠️ 頁面載入超時")
+                continue
             
-            # 嘗試解析 JSON
-            data = json.loads(json_text)
-            print("✅ 成功獲取 JSON 資料")
-            return data
-                
-        except json.JSONDecodeError as e:
-            print(f"❌ JSON 解析失敗: {e}")
-            print(f"內容前500字元: {json_text[:500]}...")
-            return None
+            # 額外等待確保內容完全載入
+            time.sleep(3)
             
-    except Exception as e:
-        print(f"❌ 獲取資料時發生錯誤: {e}")
-        return None
+            # 獲取頁面內容
+            try:
+                # 先嘗試從 pre 標籤中提取 JSON
+                try:
+                    pre_element = driver.find_element(By.TAG_NAME, "pre")
+                    json_text = pre_element.text
+                    print("✅ 從 pre 標籤中找到內容")
+                except:
+                    # 如果沒有 pre 標籤，檢查 body 內容
+                    body_element = driver.find_element(By.TAG_NAME, "body")
+                    body_text = body_element.text
+                    
+                    # 檢查是否被封鎖
+                    if "You've been blocked" in body_text or "network security" in body_text:
+                        print("🚫 被網路安全系統封鎖，嘗試重試...")
+                        continue
+                    
+                    # 檢查 body 內容是否看起來像 JSON
+                    if body_text.strip().startswith('{') and body_text.strip().endswith('}'):
+                        json_text = body_text
+                        print("✅ 從 body 標籤中找到 JSON 內容")
+                    else:
+                        print("❌ 頁面內容不是 JSON 格式")
+                        print(f"Content-Type: {driver.execute_script('return document.contentType')}")
+                        print(f"頁面標題: {driver.title}")
+                        print(f"回應內容: {body_text[:500]}...")
+                        continue
+                
+                # 嘗試解析 JSON
+                data = json.loads(json_text)
+                print("✅ 成功獲取 JSON 資料")
+                return data
+                    
+            except json.JSONDecodeError as e:
+                print(f"❌ JSON 解析失敗: {e}")
+                print(f"內容前500字元: {json_text[:500]}...")
+                continue
+                
+        except Exception as e:
+            print(f"❌ 獲取資料時發生錯誤: {e}")
+            continue
+        
+        finally:
+            driver.quit()
     
-    finally:
-        driver.quit()
+    print(f"❌ 經過 {max_retries} 次嘗試後仍然失敗")
+    return None
 
 def process_reddit_data(data: Dict, description: str) -> Optional[Dict]:
     """處理 Reddit 資料"""
@@ -243,7 +336,7 @@ def scrape_all_reddit_data():
         
         # 在子版塊之間添加延遲
         if reddit_config != REDDIT_URLS[-1]:  # 不是最後一個
-            delay = random.uniform(3, 6)
+            delay = random.uniform(15, 30)  # 大幅增加延遲時間
             print(f"⏳ 等待 {delay:.2f} 秒後繼續下一個子版塊...")
             time.sleep(delay)
     
