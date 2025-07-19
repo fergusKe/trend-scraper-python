@@ -1,17 +1,27 @@
 {
-  "updated": "2025-07-19T10:17:05.293208Z",
-  "total_found": 1,
-  "returned_count": 1,
+  "updated": "2025-07-19T10:30:14.049430Z",
+  "total_found": 2,
+  "returned_count": 2,
   "articles": [
     {
-      "recommendScore": "1303",
-      "recommendCount": "1303",
+      "recommendScore": "1302",
+      "recommendCount": "1302",
       "title": "[情報] 魔鷹退出明星賽",
       "link": "https://www.pttweb.cc/bbs/Baseball/M.1752901421.A.E32",
       "author": "",
       "board": "Baseball",
       "publishTime": "",
       "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
+    },
+    {
+      "recommendScore": "356",
+      "recommendCount": "356",
+      "title": "[問卦] 八又翻！大罷免今晚現場圖！ 人山人海",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752845887.A.763",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
     }
   ]
 }
