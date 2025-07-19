@@ -99,33 +99,36 @@ def fetch_reddit_data_with_selenium(url: str) -> Optional[Dict]:
         time.sleep(2)
         
         # 獲取頁面內容
-        page_source = driver.page_source
-        
-        # 檢查是否是 JSON 回應
-        if 'application/json' in driver.execute_script("return document.contentType") or \
-           page_source.strip().startswith('{'):
+        try:
+            # 先嘗試從 pre 標籤中提取 JSON
             try:
-                # 從 pre 標籤中提取 JSON（如果存在）
-                try:
-                    pre_element = driver.find_element(By.TAG_NAME, "pre")
-                    json_text = pre_element.text
-                except:
-                    # 如果沒有 pre 標籤，直接使用頁面內容
-                    json_text = driver.find_element(By.TAG_NAME, "body").text
+                pre_element = driver.find_element(By.TAG_NAME, "pre")
+                json_text = pre_element.text
+                print("✅ 從 pre 標籤中找到內容")
+            except:
+                # 如果沒有 pre 標籤，檢查 body 內容
+                body_element = driver.find_element(By.TAG_NAME, "body")
+                body_text = body_element.text
                 
-                # 解析 JSON
-                data = json.loads(json_text)
-                print("✅ 成功獲取 JSON 資料")
-                return data
+                # 檢查 body 內容是否看起來像 JSON
+                if body_text.strip().startswith('{') and body_text.strip().endswith('}'):
+                    json_text = body_text
+                    print("✅ 從 body 標籤中找到 JSON 內容")
+                else:
+                    print("❌ 頁面內容不是 JSON 格式")
+                    print(f"Content-Type: {driver.execute_script('return document.contentType')}")
+                    print(f"頁面標題: {driver.title}")
+                    print(f"回應內容: {body_text[:500]}...")
+                    return None
+            
+            # 嘗試解析 JSON
+            data = json.loads(json_text)
+            print("✅ 成功獲取 JSON 資料")
+            return data
                 
-            except json.JSONDecodeError as e:
-                print(f"❌ JSON 解析失敗: {e}")
-                print(f"回應內容: {page_source[:500]}...")
-                return None
-        else:
-            print("❌ 回應不是 JSON 格式")
-            print(f"Content-Type: {driver.execute_script('return document.contentType')}")
-            print(f"回應內容: {page_source[:500]}...")
+        except json.JSONDecodeError as e:
+            print(f"❌ JSON 解析失敗: {e}")
+            print(f"內容前500字元: {json_text[:500]}...")
             return None
             
     except Exception as e:
