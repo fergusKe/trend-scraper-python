@@ -21,6 +21,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
+from fake_useragent import UserAgent
 
 def setup_driver():
     """設定 Chrome WebDriver"""
@@ -32,8 +33,9 @@ def setup_driver():
     options.add_argument('--disable-blink-features=AutomationControlled')
     options.add_argument('--disable-features=VizDisplayCompositor')
     
-    # 設定更真實的用戶代理
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    # 設定隨機 User-Agent
+    ua = UserAgent()
+    user_agent = ua.random
     options.add_argument(f'--user-agent={user_agent}')
     
     # 設定視窗大小

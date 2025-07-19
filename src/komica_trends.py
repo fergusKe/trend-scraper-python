@@ -32,11 +32,8 @@ def setup_driver():
     options.add_argument('--disable-setuid-sandbox')
     
     # 使用隨機 User-Agent
-    user_agents = [
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5_2) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
-    ]
-    user_agent = random.choice(user_agents)
+    ua = UserAgent()
+    user_agent = ua.random
     options.add_argument(f'--user-agent={user_agent}')
     
     service = Service(ChromeDriverManager().install())
@@ -44,7 +41,7 @@ def setup_driver():
     
     return driver
 
-def parse_komica_line(line: str, base_url: str = "https://gita.komica1.org/00b/pixmicat.php?res=") -> Optional[Dict]:
+def parse_komica_line(line: str, link: str = None) -> Optional[Dict]:
     """解析 Komica 文章行資料"""
     try:
         # 移除行尾的"在新分頁開啟"文字
@@ -67,8 +64,11 @@ def parse_komica_line(line: str, base_url: str = "https://gita.komica1.org/00b/p
             except ValueError:
                 reply_count = 0
             
-            # 建構完整連結
-            link = f"{base_url}{thread_id}"
+            # 使用提供的連結，或建構預設連結
+            if link:
+                final_link = link
+            else:
+                final_link = f"https://gita.komica1.org/00b/pixmicat.php?res={thread_id}"
             
             return {
                 "replyCount": reply_count,
@@ -76,7 +76,7 @@ def parse_komica_line(line: str, base_url: str = "https://gita.komica1.org/00b/p
                 "time": time,
                 "title": title,
                 "description": description,
-                "link": link,
+                "link": final_link,
                 "rawText": line  # 保留原始文字以備查看
             }
             
@@ -116,26 +116,29 @@ def scrape_komica_trends():
         today_threads_pre = None
         for i, pre in enumerate(pre_elements):
             pre_text = pre.text
-            if "今日熱門討論串 Top50" in pre_text:
+            if "Top 50 Threads [Today]" in pre_text:
                 today_threads_pre = pre
                 print(f"✅ 在第 {i+1} 個 pre 標籤中找到今日熱門討論串")
                 break
         
         if not today_threads_pre:
             print("❌ 未找到包含今日熱門討論串的 pre 標籤")
+            # 列出所有 pre 標籤的內容供除錯
+            for i, pre in enumerate(pre_elements):
+                content = pre.text[:100]  # 只顯示前100個字元
+                print(f"Pre {i+1}: {content}...")
             return []
         
         # 解析內容
         print("🔍 開始解析今日熱門討論串內容...")
-        content = today_threads_pre.text
+        
+        # 獲取 HTML 內容而不是純文字
+        content = today_threads_pre.get_attribute('innerHTML')
         
         # 按行分割
         lines = content.split('\n')
         
-        # 找到包含熱門討論串資料的行
-        data_lines = []
-        in_data_section = False
-        
+        # 找到包含連結的行
         for line in lines:
             line = line.strip()
             
@@ -143,27 +146,29 @@ def scrape_komica_trends():
             if not line:
                 continue
             
-            # 檢查是否進入資料區段
-            if "今日熱門討論串 Top50" in line:
-                in_data_section = True
-                continue
-            
-            # 如果在資料區段且行包含 '|' 分隔符
-            if in_data_section and '|' in line:
-                # 確保這是有效的資料行（包含數字|ID|日期格式）
-                if re.match(r'^\d+\|', line):
-                    data_lines.append(line)
+            # 檢查是否包含連結
+            if 'href=' in line and 'res=' in line:
+                # 提取連結
+                import re
+                link_match = re.search(r'href="([^"]+)"', line)
+                if link_match:
+                    link = link_match.group(1)
+                    
+                    # 移除 HTML 標籤，保留純文字
+                    raw_text = re.sub(r'<[^>]*>', '', line)
+                    
+                    # 移除標題部分
+                    if 'Top 50 Threads [Today]' in raw_text:
+                        raw_text = raw_text.replace('Top 50 Threads [Today]', '').strip()
+                    
+                    # 確保還有內容
+                    if raw_text and '|' in raw_text:
+                        trend_data = parse_komica_line(raw_text, link)
+                        if trend_data:
+                            trends.append(trend_data)
+                            print(f"✅ 第 {len(trends)} 篇: {trend_data['title'][:40]}...")
         
-        print(f"📊 找到 {len(data_lines)} 行討論串資料")
-        
-        # 解析每一行資料
-        for i, line in enumerate(data_lines):
-            trend_data = parse_komica_line(line)
-            if trend_data:
-                trends.append(trend_data)
-                print(f"✅ 第 {len(trends)} 篇: {trend_data['title'][:40]}...")
-            else:
-                print(f"⚠️ 無法解析第 {i+1} 行: {line[:50]}...")
+        print(f"📊 總共找到 {len(trends)} 篇熱門文章")
         
     except Exception as e:
         print(f"❌ 爬取過程中出錯: {e}")
