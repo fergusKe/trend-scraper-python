@@ -1,5 +1,5 @@
 {
-  "updated": "2025-07-19T11:16:28.199883Z",
+  "updated": "2025-07-19T11:26:02.118003Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
@@ -14,6 +14,16 @@
       "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
     },
     {
+      "recommendScore": "733",
+      "recommendCount": "733",
+      "title": "[分享] 魔鷹IG更新",
+      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752921041.A.D43",
+      "author": "",
+      "board": "Baseball",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/hf6jVDJ/s/6a901f7def77dd41c511cc74d903bf92"
+    },
+    {
       "recommendScore": "355",
       "recommendCount": "355",
       "title": "[問卦] 八又翻！大罷免今晚現場圖！ 人山人海",
@@ -24,18 +34,8 @@
       "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
     },
     {
-      "recommendScore": "593",
-      "recommendCount": "593",
-      "title": "[分享] 魔鷹IG更新",
-      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752921041.A.D43",
-      "author": "",
-      "board": "Baseball",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/hf6jVDJ/s/6a901f7def77dd41c511cc74d903bf92"
-    },
-    {
-      "recommendScore": "406",
-      "recommendCount": "406",
+      "recommendScore": "407",
+      "recommendCount": "407",
       "title": "[新聞] 快訊／熱爆了！高雄鳳山1017戶無預警停電台電搶修中",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752899798.A.372",
       "author": "",
@@ -43,8 +43,8 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "351",
-      "recommendCount": "351",
+      "recommendScore": "352",
+      "recommendCount": "352",
       "title": "[新聞] 北市公車撞死「部桃外科主任」 喪命前小跑步過馬路畫面曝",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752897513.A.049",
       "author": "",
