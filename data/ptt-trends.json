@@ -1,5 +1,5 @@
 {
-  "updated": "2025-07-19T11:04:02.288808Z",
+  "updated": "2025-07-19T11:16:28.199883Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
@@ -24,6 +24,16 @@
       "imageUrl": "https://cache.pttweb.cc/imgur/lfai7QV/s/ff3ed190a517d15d53788d7936993cd0"
     },
     {
+      "recommendScore": "593",
+      "recommendCount": "593",
+      "title": "[分享] 魔鷹IG更新",
+      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752921041.A.D43",
+      "author": "",
+      "board": "Baseball",
+      "publishTime": "",
+      "imageUrl": "https://cache.pttweb.cc/imgur/hf6jVDJ/s/6a901f7def77dd41c511cc74d903bf92"
+    },
+    {
       "recommendScore": "406",
       "recommendCount": "406",
       "title": "[新聞] 快訊／熱爆了！高雄鳳山1017戶無預警停電台電搶修中",
@@ -33,19 +43,10 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "350",
-      "recommendCount": "350",
+      "recommendScore": "351",
+      "recommendCount": "351",
       "title": "[新聞] 北市公車撞死「部桃外科主任」 喪命前小跑步過馬路畫面曝",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752897513.A.049",
-      "author": "",
-      "board": "Gossiping",
-      "publishTime": ""
-    },
-    {
-      "recommendScore": "208",
-      "recommendCount": "208",
-      "title": "[新聞] 台南災區屋頂重建缺工缺料 災民籲市府請台積電協助",
-      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752885106.A.DD0",
       "author": "",
       "board": "Gossiping",
       "publishTime": ""
