@@ -1,18 +1,8 @@
 {
-  "updated": "2025-07-20T05:02:18.763256Z",
+  "updated": "2025-07-20T05:18:11.571493Z",
   "total_found": 5,
   "returned_count": 5,
   "articles": [
-    {
-      "recommendScore": "1303",
-      "recommendCount": "1303",
-      "title": "[情報] 魔鷹退出明星賽",
-      "link": "https://www.pttweb.cc/bbs/Baseball/M.1752901421.A.E32",
-      "author": "",
-      "board": "Baseball",
-      "publishTime": "",
-      "imageUrl": "https://cache.pttweb.cc/imgur/THdW3uI/s/b1ed0f270fcf70b763f672006a60489c"
-    },
     {
       "recommendScore": "1194",
       "recommendCount": "1194",
@@ -24,8 +14,8 @@
       "imageUrl": "https://cache.pttweb.cc/imgur/hf6jVDJ/s/6a901f7def77dd41c511cc74d903bf92"
     },
     {
-      "recommendScore": "472",
-      "recommendCount": "472",
+      "recommendScore": "476",
+      "recommendCount": "476",
       "title": "[新聞] 快新聞／領錢了！南韓政府普發最高9500台幣　下週一開始全民都能拿",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752927080.A.5CA",
       "author": "",
@@ -33,8 +23,8 @@
       "publishTime": ""
     },
     {
-      "recommendScore": "437",
-      "recommendCount": "437",
+      "recommendScore": "451",
+      "recommendCount": "451",
       "title": "[新聞] 「綠色恐怖愈來愈濃」馬英九問賴清德：我做得到兩岸和平 為何你不行",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752974393.A.2B8",
       "author": "",
@@ -46,6 +36,15 @@
       "recommendCount": "409",
       "title": "[新聞] 才開幕第10天！台南旭集爆「集體食物中毒」　6人緊急就醫",
       "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752916461.A.471",
+      "author": "",
+      "board": "Gossiping",
+      "publishTime": ""
+    },
+    {
+      "recommendScore": "363",
+      "recommendCount": "363",
+      "title": "Re: [問卦] 青島集會再現島嶼天光開場 民眾感動落淚",
+      "link": "https://www.pttweb.cc/bbs/Gossiping/M.1752931942.A.3D0",
       "author": "",
       "board": "Gossiping",
       "publishTime": ""
