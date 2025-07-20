@@ -1,8 +1,8 @@
 name: Update PTT Trends (Python)
 
 on:
-    schedule:
-        - cron: '1,11,21,31,41,51 * * * *' # 每 10 分鐘執行（錯開時間）
+    # schedule:
+    #     - cron: '1,11,21,31,41,51 * * * *' # 每 10 分鐘執行（錯開時間）
     workflow_dispatch:
 
 jobs:

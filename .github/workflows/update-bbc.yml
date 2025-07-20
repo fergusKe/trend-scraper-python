@@ -1,8 +1,8 @@
 name: Update BBC Trends (Python)
 
 on:
-    schedule:
-        - cron: '26,56 * * * *' # 每小時第 26 和 56 分鐘執行
+    # schedule:
+    #     - cron: '26,56 * * * *' # 每小時第 26 和 56 分鐘執行
     workflow_dispatch:
 
 jobs:

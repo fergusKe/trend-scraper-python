@@ -1,8 +1,8 @@
 name: Update Komica Trends (Python)
 
 on:
-    schedule:
-        - cron: '18,48 * * * *' # 每小時第 18 和 48 分鐘執行
+    # schedule:
+    #     - cron: '18,48 * * * *' # 每小時第 18 和 48 分鐘執行
     workflow_dispatch:
 
 jobs:
